@@ -1,0 +1,75 @@
+<configuration scan="true" scanPeriod=" 5 seconds">
+    <jmxConfigurator />
+
+    <appender name="ERROR" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>destination</key>
+            <defaultValue>error</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <File>../logs/error.log</File>
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <!-- rollover daily -->
+                    <fileNamePattern>../logs/%d{yyyy-MM-dd}/error-%d{yyyy-MM-dd}-%i.log.gz
+                    </fileNamePattern>
+                    <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                        <!-- or whenever the file size reaches 100MB -->
+                        <maxFileSize>512MB</maxFileSize>
+                    </timeBasedFileNamingAndTriggeringPolicy>
+                    <maxHistory>20</maxHistory>
+                </rollingPolicy>
+                <encoder>
+                    <pattern>
+                        %d{yyyy-MM-dd HH:mm:ss.SSS} %X{logger_id} %-5level %logger{0}:%line - %msg%n
+                    </pattern>
+                </encoder>
+                <filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印错误日志 -->
+                    <level>ERROR</level>
+                    <onMatch>ACCEPT</onMatch>
+                    <onMismatch>DENY</onMismatch>
+                </filter>
+            </appender>
+        </sift>
+    </appender>
+
+    <appender name="BUSINESS_LOG" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>destination</key>
+            <defaultValue>waliyun</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="BUSINESS_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <File>../logs/${destination}.log</File>
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <!-- rollover daily -->
+                    <fileNamePattern>../logs/%d{yyyy-MM-dd}/${destination}-%d{yyyy-MM-dd}-%i.log.gz
+                    </fileNamePattern>
+                    <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                        <maxFileSize>512MB</maxFileSize>
+                    </timeBasedFileNamingAndTriggeringPolicy>
+                    <maxHistory>20</maxHistory>
+                </rollingPolicy>
+                <encoder>
+                    <pattern>
+                        %d{yyyy-MM-dd HH:mm:ss.SSS} %X{logger_id} %-5level %logger{0}:%line - %msg%n
+                    </pattern>
+                </encoder>
+            </appender>
+        </sift>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %X{logger_id} %-5level %logger{0}:%line - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="BUSINESS_LOG" />
+        <appender-ref ref="ERROR" />
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

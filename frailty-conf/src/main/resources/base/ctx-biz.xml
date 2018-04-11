@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="com.yangyongqiang.frailty.biz" />
+
+    <task:annotation-driven executor="asyncExecutor" scheduler="poolTaskScheduler" />
+    <task:executor id="asyncExecutor" pool-size="150" />
+
+    <bean id="poolTaskScheduler" class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">
+        <property name="waitForTasksToCompleteOnShutdown" value="true" />
+        <property name="awaitTerminationSeconds" value="5" />
+        <property name="threadNamePrefix" value="runnerScheduler-" />
+        <property name="poolSize" value="10" />
+    </bean>
+
+    <import resource="ctx-jdbc.xml" />
+</beans>

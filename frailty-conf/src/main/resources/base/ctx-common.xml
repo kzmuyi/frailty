@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress SpringModelInspection -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <context:annotation-config />
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis_pool_config_maxTotal}" />
+        <property name="maxIdle" value="${redis_pool_config_maxIdle}" />
+        <property name="minIdle" value="${redis_pool_config_minIdle}" />
+        <property name="testOnBorrow" value="true" />
+    </bean>
+
+    <bean id="basicJedisPool" class="redis.clients.jedis.JedisPool" destroy-method="destroy">
+        <!-- config -->
+        <constructor-arg ref="jedisPoolConfig" />
+        <!-- host -->
+        <constructor-arg value="${basic_redis_host}" />
+        <!-- port -->
+        <constructor-arg value="${basic_redis_port}" />
+        <!-- timeout -->
+        <constructor-arg value="${basic_redis_timeout}" />
+        <!-- password -->
+        <constructor-arg value="${basic_redis_passwd}" />
+        <!-- database index -->
+        <constructor-arg value="${basic_redis_db}" />
+    </bean>
+</beans>

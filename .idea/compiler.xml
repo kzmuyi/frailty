@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="frailty-biz" />
+        <module name="frailty-common" />
+        <module name="frailty-conf" />
+        <module name="frailty-dal" />
+        <module name="frailty-web" />
+        <module name="frailtybiz" />
+        <module name="frailtycommon" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="frailty" target="1.8" />
+      <module name="frailty-biz" target="1.8" />
+      <module name="frailty-common" target="1.8" />
+      <module name="frailty-conf" target="1.8" />
+      <module name="frailty-dal" target="1.8" />
+      <module name="frailty-web" target="1.8" />
+      <module name="frailtybiz" target="1.5" />
+      <module name="frailtycommon" target="1.5" />
+      <module name="frailtydal" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

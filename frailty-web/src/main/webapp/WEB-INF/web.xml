@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+        http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+  <display-name>waliyun</display-name>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:application-context.xml</param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>*</url-pattern>
+  </filter-mapping>
+
+  <!--&lt;!&ndash; 无需登录的Filter &ndash;&gt;-->
+  <!--<filter>-->
+    <!--<filter-name>InnocentRequestFilter</filter-name>-->
+    <!--<filter-class>com.baijia.cas.client.filter.InnocentRequestFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>InnocentRequestFilter</filter-name>-->
+    <!--<url-pattern>/assist/*</url-pattern>-->
+  <!--</filter-mapping>-->
+
+  <!--&lt;!&ndash; 与CAS Single Sign Out Filter配合，注销登录信息 &ndash;&gt;-->
+  <!--<listener>-->
+    <!--<listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>-->
+  <!--</listener>-->
+  <!--&lt;!&ndash; CAS Server 通知 CAS Client，删除session,注销登录信息 &ndash;&gt;-->
+  <!--<filter>-->
+    <!--<filter-name>CAS Single Sign Out Filter</filter-name>-->
+    <!--<filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>CAS Single Sign Out Filter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+  <!-- 登录认证，未登录用户导向CAS Server进行认证 -->
+  <!--<filter>-->
+    <!--<filter-name>CAS Filter</filter-name>-->
+    <!--<filter-class>com.baijia.cas.client.filter.FilterProxy</filter-class>-->
+    <!--<init-param>-->
+      <!--<param-name>proxyedFilterClass</param-name>-->
+      <!--<param-value>org.jasig.cas.client.authentication.AuthenticationFilter</param-value>-->
+    <!--</init-param>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>CAS Filter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+  <!-- CAS Client向CAS Server进行ticket验证 -->
+  <!--<filter>-->
+    <!--<filter-name>CAS Validation Filter</filter-name>-->
+    <!--<filter-class>com.baijia.cas.client.filter.FilterProxy</filter-class>-->
+    <!--<init-param>-->
+      <!--<param-name>proxyedFilterClass</param-name>-->
+      <!--<param-value>com.baijia.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</param-value>-->
+    <!--</init-param>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>CAS Validation Filter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+  <!-- 封装request, 支持getUserPrincipal等方法 -->
+  <!--<filter>-->
+    <!--<filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>-->
+    <!--<filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+  <!-- 存放Assertion到ThreadLocal中 -->
+  <!--<filter>-->
+    <!--<filter-name>CAS Assertion Thread Local Filter</filter-name>-->
+    <!--<filter-class>org.jasig.cas.client.util.AssertionThreadLocalFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>CAS Assertion Thread Local Filter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+  <!-- 初始化访问控制的上下文信息 -->
+  <!--<filter>-->
+    <!--<filter-name>Access Control Context Init Filter</filter-name>-->
+    <!--&lt;!&ndash; configCurrentRoleAtUI​如果配置true(见cas-client.properties)，前后端通过cookie:CAS_AC_CURRENT_ROLE来交换账号当前选择的角色，用户选择当前角色后，由前端写入cookie，后端如果未读到这个配置或配置不合理，则会随机选择一个当前账号的角色xie'ru &ndash;&gt;-->
+    <!--<filter-class>com.baijia.cas.client.filter.FilterProxy</filter-class>-->
+    <!--<init-param>-->
+      <!--<param-name>proxyedFilterClass</param-name>-->
+      <!--<param-value>com.baijia.cas.client.filter.AccessControlContextInitFilter</param-value>-->
+    <!--</init-param>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>Access Control Context Init Filter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+  <!--&lt;!&ndash; 判断登录账号是否被允许访问系统 &ndash;&gt;-->
+  <!--<filter>-->
+    <!--<filter-name>Can Visit This APP Filter</filter-name>-->
+    <!--<filter-class>com.baijia.cas.client.filter.FilterProxy</filter-class>-->
+    <!--<init-param>-->
+      <!--<param-name>proxyedFilterClass</param-name>-->
+      <!--<param-value>com.baijia.cas.client.filter.CanVisitThisAppFilter</param-value>-->
+    <!--</init-param>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>Can Visit This APP Filter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.json</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.xlsx</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
+
+</web-app>

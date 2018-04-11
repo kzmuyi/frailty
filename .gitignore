@@ -1,0 +1,10 @@
+dea
+.DS_Store
+*.iml
+target
+logs
+.classpath
+.project
+.settings/
+.amateras
+qrcode/

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="frailty-web:war">
+    <output-path>$PROJECT_DIR$/frailty-web/target</output-path>
+    <root id="archive" name="frailty-web.war">
+      <element id="artifact" artifact-name="frailty-web:war exploded" />
+    </root>
+  </artifact>
+</component>

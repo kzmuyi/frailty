@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/frailty.iml" filepath="$PROJECT_DIR$/frailty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frailty-biz/frailty-biz.iml" filepath="$PROJECT_DIR$/frailty-biz/frailty-biz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frailty-common/frailty-common.iml" filepath="$PROJECT_DIR$/frailty-common/frailty-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frailty-conf/frailty-conf.iml" filepath="$PROJECT_DIR$/frailty-conf/frailty-conf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frailty-dal/frailty-dal.iml" filepath="$PROJECT_DIR$/frailty-dal/frailty-dal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frailty-web/frailty-web.iml" filepath="$PROJECT_DIR$/frailty-web/frailty-web.iml" />
+    </modules>
+  </component>
+</project>
